@@ -51,17 +51,17 @@
         <div class="input-group my-3 mx-auto">
           <span class="input-group-text">@</span>
           <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Ingrese su e-mail"
-            maxlength="50" value="<%= username %>" readonly required />
+            maxlength="50" value="<%= email %>" readonly required />
           <button id="btn-log" type="submit" class="btn btn-danger">Login</button>
         </div>
         <div class="row">
           <div class="col-md mb-3">
             <input type="text" class="form-control" id="inputFirstName" name="firstName" placeholder="Ingrese su nombre"
-              required>
+              value="<%= firstName %>" required>
           </div>
           <div class="col-md mb-3">
             <input type="text" class="form-control" id="inputLastName" name="lastName" placeholder="Ingrese su apellido"
-              required>
+              value="<%= lastName %>" required>
           </div>
         </div>
         <div class="row">
@@ -76,7 +76,7 @@
         </div>
         <div class="mb-3">
           <input type="url" class="form-control" id="inputAvatar" name="avatar" placeholder="Ingrese su avatar (URL)"
-            required>
+            value="<%= avatar %>" required>
         </div>
       </form>
       <div id="compression"></div>

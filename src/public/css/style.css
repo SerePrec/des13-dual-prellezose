@@ -34,9 +34,6 @@ main.cargar {
   margin: auto;
   padding: 0.5rem 2rem;
 }
-.form-wrapper a {
-  width: fit-content;
-}
 main.listado {
   text-align: center;
 }
@@ -285,6 +282,24 @@ div.bg-yellow {
 }
 .error-wrapper a {
   width: fit-content;
+}
+
+.btn-google {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem auto 0 auto;
+}
+.btn-google img {
+  width: 1.3rem;
+  margin-right: 0.5rem;
+}
+
+.btn-redirect {
+  display: block;
+  margin: 3rem auto;
+  width: 95%;
+  max-width: 18rem;
 }
 
 /* para pisar Bootstrap */

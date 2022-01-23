@@ -18,7 +18,11 @@ router.get("/", isAuthWeb, (req, res) => {
   }
   res.render("./pages/home", {
     title: "Carga de productos y Chat",
-    username: req.user?.username,
+    username: req.user.username || req.user.displayName,
+    email: req.user.username || req.user.emails[0].value,
+    firstName: req.user.name?.givenName || "",
+    lastName: req.user.name?.familyName || "",
+    avatar: (req.user.photos && req.user.photos[0].value) || "",
     successRegister: message
   });
 });
@@ -106,5 +110,18 @@ router.get("/productos-mock", isAuthWeb, (req, res) => {
     root: path.join(__dirname, "..", "views")
   });
 });
+
+router.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+);
+
+router.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/",
+    failureRedirect: "/login-error"
+  })
+);
 
 export default router;

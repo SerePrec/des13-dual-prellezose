@@ -1,5 +1,6 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import { userModel } from "../models/index.js";
 import { createHash, isValidPassword } from "../utils/crypt.js";
 
@@ -53,16 +54,56 @@ passport.use(
   })
 );
 
+// >>>> Solo para local strategy
+// passport.serializeUser((user, done) => {
+//   done(null, user.id);
+// });
+
+// passport.deserializeUser(async (id, done) => {
+//   try {
+//     const user = await userModel.getById(id);
+//     done(null, user);
+//   } catch (error) {
+//     done(error);
+//   }
+// });
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL:
+        "https://des13-dual-prellezose.herokuapp.com/auth/google/callback"
+      //callbackURL: "/auth/google/callback"
+    },
+    (accessToken, refreshToken, userProfile, done) => {
+      console.log(userProfile);
+      return done(null, userProfile);
+    }
+  )
+);
+
+// >>>> Combinando ambas opciones de serialización
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  if (user.username) {
+    done(null, user.id);
+  } else {
+    done(null, user);
+  }
 });
 
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await userModel.getById(id);
-    done(null, user);
-  } catch (error) {
-    done(error);
+passport.deserializeUser(async (data, done) => {
+  if (typeof data === "object") {
+    done(null, data);
+  } else {
+    try {
+      const id = data;
+      const user = await userModel.getById(id);
+      done(null, user);
+    } catch (error) {
+      done(error);
+    }
   }
 });
 
