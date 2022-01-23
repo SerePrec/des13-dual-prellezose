@@ -9,7 +9,12 @@
   <main class="cargar">
     <div class="welcome">
       <h3>Bienvenido/a, <span><%= username %></span></h3>
-      <button id="btn-logout" class="btn btn-warning">Logout</button>
+      <div>
+        <% if (avatar) { %>
+        <img src="<%= avatar %>" alt="avatar">
+        <% } %>
+        <button id="btn-logout" class="btn btn-warning">Logout</button>
+      </div>
     </div>
     <% if (successRegister&&successRegister.length>0) { %>
     <div class="alert alert-primary alert-dismissible fade show d-flex align-items-center successRegister" role="alert">

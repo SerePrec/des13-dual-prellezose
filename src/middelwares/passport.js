@@ -73,12 +73,11 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL:
-        "https://des13-dual-prellezose.herokuapp.com/auth/google/callback"
-      //callbackURL: "/auth/google/callback"
+      // callbackURL:
+      //   "https://des13-dual-prellezose.herokuapp.com/auth/google/callback"
+      callbackURL: "/auth/google/callback"
     },
     (accessToken, refreshToken, userProfile, done) => {
-      console.log(userProfile);
       return done(null, userProfile);
     }
   )
@@ -86,15 +85,15 @@ passport.use(
 
 // >>>> Combinando ambas opciones de serialización
 passport.serializeUser((user, done) => {
-  if (user.username) {
-    done(null, user.id);
-  } else {
+  if (user.provider) {
     done(null, user);
+  } else {
+    done(null, user.id);
   }
 });
 
 passport.deserializeUser(async (data, done) => {
-  if (typeof data === "object") {
+  if (data.provider) {
     done(null, data);
   } else {
     try {

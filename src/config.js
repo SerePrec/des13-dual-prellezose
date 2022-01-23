@@ -6,7 +6,7 @@ if (process.env.NODE_ENV !== "production") {
 const config = {
   PORT: process.env.PORT || 8080,
   mongoDb: {
-    connectionString: "mongodb://localhost/des13",
+    connectionString: "mongodb://localhost/des13-dual",
     options: {
       //useNewUrlParser: true, //No necesario desde mongoose 6
       //useUnifiedTopology: true, //No necesario desde mongoose 6
