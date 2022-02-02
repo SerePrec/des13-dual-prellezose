@@ -12,10 +12,7 @@ const config = {
       //useUnifiedTopology: true, //No necesario desde mongoose 6
       serverSelectionTimeoutMS: 5000
     },
-    advancedOptions: {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    }
+    advancedOptions: { useUnifiedTopology: true }
   },
   mongoDbAtlas: {
     connectionString: process.env.MONGODB_ATLAS_URI,
